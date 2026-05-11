@@ -134,8 +134,8 @@ grid_req     = grid.clone().requires_grad_(True)
 phi_vals     = agent(grid_req)
 learned_grad = torch.autograd.grad(phi_vals.sum(), grid_req)[0].detach().numpy() #learned strategy
 
-#sign         = np.sign(np.mean(np.sum(learned_grad * (-grid_np), axis=1)))
-#learned_grad = sign * learned_grad
+sign         = np.sign(np.mean(np.sum(learned_grad * (-grid_np), axis=1)))
+learned_grad = sign * learned_grad
 
 Sigma_inv_np     = np.linalg.inv(Sigma_np)
 analytical_grad  = -0.5 * (grid_np @ Sigma_inv_np.T) #analytical strategy from Part I ex.6 eq.(11)
